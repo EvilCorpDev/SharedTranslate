@@ -4,10 +4,11 @@ $(function() {
 
 var hoganRenderer = {
 	renderTemplate: function() {
-		$.get(window.location.pathname, function(data) {
-			var template = Hogan.compile(data);
+		$.get(window.location.pathname + '/content/', function(templateRaw) {
+			var template = Hogan.compile(templateRaw);
 			$.get(window.location.pathname + '/data', function(data) {
-				$('.container').html = template.render(data);
+				$('.main-content').append(template.render({"data":data}));
+				console.log(template.render(data))
 			});
 		});
 	},

@@ -5,7 +5,6 @@ import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.servlet.ModelAndView
 
 /**
  * Created by Zakhar_Kliap on 27-Apr-16.
@@ -14,8 +13,13 @@ import org.springframework.web.servlet.ModelAndView
 class TranslationController() {
 
     @RequestMapping("/translate")
-    fun translate(): ModelAndView {
-        return ModelAndView("base")
+    fun translate(): String {
+        return "base"
+    }
+
+    @RequestMapping("/translate/content")
+    fun translateContent(): String {
+        return "translate-page"
     }
 
     @RequestMapping(path = arrayOf("/translate/data"), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
