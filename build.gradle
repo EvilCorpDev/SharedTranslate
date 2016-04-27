@@ -1,0 +1,45 @@
+buildscript {
+	ext {
+		springBootVersion = '1.3.3.RELEASE'
+		kotlinVersion = '1.0.1'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+	}
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'spring-boot' 
+
+jar {
+	baseName = 'sharedtranslate'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+	compile('org.springframework.boot:spring-boot-starter-jersey')
+	//compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
+	compile('net.sourceforge.nekohtml:nekohtml:1.9.13')
+	compile('com.google.code.gson:gson:1.7.2')
+	testCompile('org.springframework.boot:spring-boot-starter-test') 
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.12'
+}

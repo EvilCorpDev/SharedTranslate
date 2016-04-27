@@ -1,0 +1,26 @@
+<div class="price-table">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="original">
+                {{#data}}<span>{{.}}</span>{{/data}}
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="translated">
+
+            </div>
+            <div class="contact-form bottom your-translate">
+                <h2>Send a message</h2>
+                <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                    <div class="form-group">
+                        <textarea name="message" id="message" required="required" class="form-control translate-area" rows="8" placeholder="Your text here"></textarea>
+                    </div>                        
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+       
+    </div>
+</div>
