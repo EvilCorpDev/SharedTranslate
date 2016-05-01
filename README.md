@@ -1,2 +1,2 @@
 # SharedTranslate
-Diploma project for translate texts buy different people.
+Diploma project for translate texts by different people.
