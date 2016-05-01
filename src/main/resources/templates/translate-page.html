@@ -1,26 +1,38 @@
-<div class="price-table">
+<section class="price-table">
     <div class="row">
         <div class="col-sm-6">
-            <div class="original">
-                {{#original}}<span class="sentence">{{.}}</span>{{/original}}
-            </div>
+            <article class="translate-page___original">
+                {{#original}}
+                    <div class="translate-page___sentence">
+                        <div class="translate-page___content">{{.}}</div>
+                        <div class="translate-page___actions">
+                            <div class="action manual-translate">Translate</div>
+                            <div class="action yandex-translate">Yandex.Translate</div>
+                            <div class="action mark-translate">Mark translated</div>
+                            <div class="action copy-text">Copy text</div>
+                        </div>
+                    </div>
+                {{/original}}
+            </article>
         </div>
         <div class="col-sm-6">
-            <div class="translated">
-                {{#translated}}<div class="translation">{{.}}</div>{{/translated}}
-            </div>
-            <div class="contact-form bottom your-translate">
+            <article class="translate-page___translated">
+                {{#translated}}
+                    <div class="translate-page___translation">{{.}}</div>
+                {{/translated}}
+            </article>
+            <article class="contact-form bottom your-translate">
                 <h2>Send a message</h2>
                 <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
                     <div class="form-group">
-                        <textarea name="message" id="message" required="required" class="form-control translate-area" rows="8" placeholder="Your text here"></textarea>
+                        <textarea name="message" id="message" required="required" class="form-control translate-page___translate-area" rows="8" placeholder="Your text here"></textarea>
                     </div>                        
                     <div class="form-group">
                         <input type="submit" name="submit" class="btn btn-submit" value="Submit">
                     </div>
                 </form>
-            </div>
+            </article>
         </div>
        
     </div>
-</div>
+</section>
