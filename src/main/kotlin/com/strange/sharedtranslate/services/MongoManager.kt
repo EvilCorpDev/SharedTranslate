@@ -4,13 +4,15 @@ import com.strange.sharedtranslate.entities.TextTranslationWrapper
 import com.strange.sharedtranslate.exceptions.EntityNotFoundException
 import com.strange.sharedtranslate.repository.RepositoryActions
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
 /**
  * Manager Service implementation
  *
  * Created by Notebook on 02.05.2016.
  */
-class MongoManager(@Autowired val repository: RepositoryActions): ManagerService {
+@Component
+class MongoManager @Autowired constructor(val repository: RepositoryActions): ManagerService {
 
     override fun create(created: TextTranslationWrapper): TextTranslationWrapper {
         return repository.save(created.copy())
