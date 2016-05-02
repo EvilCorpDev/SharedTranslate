@@ -14,6 +14,7 @@ var hoganRenderer = {
 			$.get(window.location.pathname + '/data', function(data) {
 				$('.main-content').append(template.render({"original":data}));
 				self.appendHandlers(self);
+				self.appendActionHandlers(self);
 			});
 		});
 	},
@@ -34,6 +35,13 @@ var hoganRenderer = {
 			} else {
 				self.showElement(this);
 			}
+		});
+	},
+
+	appendActionHandlers: function(self) {
+		$('.translate-page___manual-translate').on('click', function() {
+			$('.translate-page___selected-sentence').text(self.$sentence.find('.translate-page___content').text());
+			$('.translate-page___translate-area').focus();
 		});
 	},
 

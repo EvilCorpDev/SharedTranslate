@@ -6,10 +6,10 @@
                     <div class="translate-page___sentence">
                         <div class="translate-page___content">{{.}}</div>
                         <div class="translate-page___actions">
-                            <div class="action manual-translate">Translate</div>
-                            <div class="action yandex-translate">Yandex.Translate</div>
-                            <div class="action mark-translate">Mark translated</div>
-                            <div class="action copy-text">Copy text</div>
+                            <div class="translate-page___action translate-page___manual-translate">Translate</div>
+                            <div class="translate-page___action translate-page___yandex-translate">Yandex.Translate</div>
+                            <div class="translate-page___action translate-page___mark-translate">Mark translated</div>
+                            <div class="translate-page___action translate-page___copy-text">Copy text</div>
                         </div>
                     </div>
                 {{/original}}
@@ -22,7 +22,8 @@
                 {{/translated}}
             </article>
             <article class="contact-form bottom your-translate">
-                <h2>Send a message</h2>
+                <h2>Enter your translation for selection:</h2>
+                <div class="translate-page___selected-sentence"></div>
                 <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
                     <div class="form-group">
                         <textarea name="message" id="message" required="required" class="form-control translate-page___translate-area" rows="8" placeholder="Your text here"></textarea>
