@@ -1,7 +1,7 @@
 define(
 	'translate',
-	['jquery'],
-	function($) {
+	['jquery', 'yandex.translate'],
+	function($, translator) {
 		return configurer;
 	}
 );
@@ -10,6 +10,7 @@ var configurer = {
 
 	$sentence: undefined,
 	speed: 300,
+
 	afterRender: function() {
 		this.appendHandlers(this);
 		this.appendActionHandlers(this);
@@ -39,11 +40,21 @@ var configurer = {
 			$('.translate-page___selected-sentence').text(self.$sentence.find('.translate-page___content').text());
 			$('.translate-page___translate-area').focus();
 		});
+		$('.translate-page___yandex-translate').on('click', function() {
+			translator.translate(self.$sentence.find('.translate-page___content').text(), 
+				self.translatorCallback, self);
+		});
 	},
 
 	showElement: function(element) {
 		this.$sentence = $(element).parent();
 		this.$sentence.find('.translate-page___actions').show(this.speed);
 		$(element).addClass('translate-page___highlighted-text');
+	},
+
+	translatorCallback: function(translationData, self) {
+		$('.translate-page___selected-sentence').text(self.$sentence.find('.translate-page___content').text());
+		$('.translate-page___translate-area').text(translationData.text[0]);
+		$('.translate-page___translate-area').focus();
 	}
 }
