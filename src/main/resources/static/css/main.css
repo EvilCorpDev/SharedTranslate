@@ -2790,6 +2790,55 @@ span.stButton_gradient,
   text-align: center;
 }
 
+.upload-page___file-upload-container {
+  border: 1px solid #eaeaea;
+  border-radius: 3px;
+  height: 65px;
+  display: flex;
+}
+
+.upload-page___file-upload-container:hover {
+  border-color: #4fcccd;
+}
+
+.upload-page___file-chooser {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload_page___file-btn {
+  margin: 10px;
+  border: none;
+  background-color: #4fcccd;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  margin-top: 5px;
+  border-bottom: 3px solid #2f9697;
+  box-shadow: none;
+  padding: 10px;
+}
+
+.upload_page___file-btn:hover {
+  color: #fff;
+  outline: none;
+  box-shadow: none;
+  opacity: .8;
+}
+
+.upload_page___chosen-file {
+  align-self: center;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

@@ -14,7 +14,7 @@ class Home {
     @RequestMapping("/")
     fun index(): ModelAndView {
         val modelAndView = ModelAndView("index")
-        modelAndView.addObject("textToTranslate", TextParser("input.txt").parseText())
+       // modelAndView.addObject("textToTranslate", TextParser("input.txt").parseText())
         return modelAndView
     }
 }

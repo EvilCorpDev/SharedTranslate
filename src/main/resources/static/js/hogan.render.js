@@ -11,7 +11,7 @@ var hoganRenderer = {
 		$.get(window.location.pathname + '/content/', function(templateRaw) {
 			var template = Hogan.compile(templateRaw);
 			$.get(window.location.pathname + '/data', function(data) {
-				$('.main-content').append(template.render({"original":data}));
+				$('.main-content').append(template.render({'original':data, 'title': 'Article title'}));
 				configurer.afterRender();
 			});
 		});
