@@ -1,4 +1,4 @@
-package com.strange.sharedtranslate.services
+package com.strange.sharedtranslate.repository
 
 import com.strange.sharedtranslate.entities.TextTranslationWrapper
 

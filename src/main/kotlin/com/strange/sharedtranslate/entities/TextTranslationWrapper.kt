@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document
  * Created by Notebook on 02.05.2016.
  */
 @Document(collection = "articles")
-data class TextTranslationWrapper(val article: String, val id: String, val original: String,
+data class TextTranslationWrapper(val article: String, val id: String?, val original: String,
                                   val translations: List<TranslationWrapper>) {
 
     fun update(newTranslations: List<TranslationWrapper>): TextTranslationWrapper {

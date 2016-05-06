@@ -11,6 +11,19 @@ var configurer = {
 	$sentence: undefined,
 	speed: 300,
 
+	getData: function(matches, callback, templateRaw) {
+		var self = this;
+		console.log(matches[1] + '/data' + '?article=' + matches[2]);
+		$.ajax({
+			url: matches[1] + '/data' + '?article=' + matches[2].substr(1),
+			success: function(data) {
+				console.log('uspeh');
+				callback(data, templateRaw)
+				self.afterRender();
+			}
+		});
+	},
+
 	afterRender: function() {
 		this.appendHandlers(this);
 		this.appendActionHandlers(this);

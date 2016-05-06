@@ -1,4 +1,4 @@
-package com.strange.sharedtranslate.services
+package com.strange.sharedtranslate.repository
 
 import com.strange.sharedtranslate.entities.TextTranslationWrapper
 import com.strange.sharedtranslate.exceptions.EntityNotFoundException
@@ -28,7 +28,7 @@ class MongoManager @Autowired constructor(val repository: RepositoryActions): Ma
     }
 
     override fun findAllByArticle(article: String): List<TextTranslationWrapper> {
-        return repository.findAllByArticle(article);
+        return repository.findByArticle(article);
     }
 
     override fun findById(id: String): TextTranslationWrapper? {
@@ -36,6 +36,9 @@ class MongoManager @Autowired constructor(val repository: RepositoryActions): Ma
     }
 
     override fun update(updated: TextTranslationWrapper): TextTranslationWrapper {
+        if(updated.id == null) {
+            throw EntityNotFoundException("Entity with null id")
+        }
         val toBeSaved = repository.findOne(updated.id)?.update(updated.translations)
         if(toBeSaved != null) {
             return repository.save(toBeSaved);

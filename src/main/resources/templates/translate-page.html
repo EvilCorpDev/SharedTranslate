@@ -4,7 +4,7 @@
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title">{{title}}</h1>
+                            <h1 class="title">{{article}}</h1>
                         </div>                        
                     </div>
                 </div>
@@ -16,9 +16,9 @@
     <div class="row">
         <div class="col-sm-6">
             <article class="translate-page___original">
-                {{#original}}
+                {{#sentences}}
                     <div class="translate-page___sentence">
-                        <div class="translate-page___content">{{.}}</div>
+                        <div class="translate-page___content" id="{{id}}">{{original}}</div>
                         <div class="translate-page___actions">
                             <div class="translate-page___action translate-page___manual-translate">Translate</div>
                             <div class="translate-page___action translate-page___yandex-translate">Yandex.Translate</div>
@@ -26,7 +26,7 @@
                             <div class="translate-page___action translate-page___copy-text" data-clipboard-target="#foo">Copy text</div>
                         </div>
                     </div>
-                {{/original}}
+                {{/sentences}}
             </article>
         </div>
         <div class="col-sm-6">

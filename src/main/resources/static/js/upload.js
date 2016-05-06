@@ -8,6 +8,11 @@ define(
 
 var configurer = {
 
+	getData: function(matches, callback, templateRaw) {
+		callback({}, templateRaw);
+		this.afterRender();
+	},
+
 	afterRender: function() {
 		this.appendFileChoserHandler(this);
 		//this.appendActionHandlers(this);

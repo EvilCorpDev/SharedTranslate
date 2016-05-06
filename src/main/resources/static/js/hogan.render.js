@@ -1,19 +1,25 @@
 $(function() {
-	require([window.location.pathname.substr(1), 'jquery'], function(configurer, $) {
-		hoganRenderer.renderTemplate(configurer);
+	var path = /(\/\w+)(\/\w+)?/g;
+	var matches = path.exec(window.location.pathname);
+	console.log(matches[1].substr(1));
+	require([matches[1].substr(1), 'jquery'], function(configurer, $) {
+		hoganRenderer.renderTemplate(configurer, matches);
 	});
 });
 
 var hoganRenderer = {
 
-	renderTemplate: function(configurer) {
+	renderTemplate: function(configurer, matches) {
 		var self = this;
-		$.get(window.location.pathname + '/content/', function(templateRaw) {
-			var template = Hogan.compile(templateRaw);
-			$.get(window.location.pathname + '/data', function(data) {
-				$('.main-content').append(template.render({'original':data, 'title': 'Article title'}));
-				configurer.afterRender();
-			});
+		$.get(matches[1] + '/content/', function(templateRaw) {
+			configurer.getData(matches, self.appendContent, templateRaw);
 		});
-	},	
+	},
+
+	appendContent: function(data, templateRaw) {
+		console.log('-----------trace---------------')
+		console.log(data);
+		var template = Hogan.compile(templateRaw);
+		$('.main-content').append(template.render(data));
+	}
 }

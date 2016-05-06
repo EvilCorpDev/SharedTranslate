@@ -13,7 +13,7 @@ interface RepositoryActions: Repository<TextTranslationWrapper, String> {
 
     fun delete(deleted: TextTranslationWrapper): TextTranslationWrapper
 
-    fun findAllByArticle(article: String): List<TextTranslationWrapper>
+    fun findByArticle(article: String): List<TextTranslationWrapper>
 
     fun findOne(id: String): TextTranslationWrapper?
 
