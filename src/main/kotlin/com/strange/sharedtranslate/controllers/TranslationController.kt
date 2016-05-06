@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
 import java.util.*
+import javax.ws.rs.DefaultValue
 
 /**
  * Created by Zakhar_Kliap on 27-Apr-16.
@@ -40,7 +41,7 @@ class TranslationController @Autowired constructor(val mongoMan: MongoManager) {
     @RequestMapping(path = arrayOf("/translate/save"), method = arrayOf(RequestMethod.POST))
     fun saveTranslation(@RequestParam translation: String,
                         @RequestParam("id") originalId: String,
-                        @RequestParam author: String): ResponseEntity<String> {
+                        @DefaultValue("Zakhar Kliap") @RequestParam author: String): ResponseEntity<String> {
         println(translation);
         val toBeUpdate = mongoMan.findById(originalId)?.update(listOf(TranslationWrapper(translation, author, Date())))
         if(toBeUpdate != null) {

@@ -52,11 +52,14 @@ var configurer = {
 		$('.translate-page___manual-translate').on('click', function() {
 			$('.translate-page___selected-sentence').text(self.$sentence.find('.translate-page___content').text());
 			$('.translate-page___translate-area').focus();
+			$('.translate-page___original-id').attr('id', $(self.$sentence).attr('id'))
 			self.showTranslations($(self.$sentence).attr('id'));
 		});
 		$('.translate-page___yandex-translate').on('click', function() {
 			translator.translate(self.$sentence.find('.translate-page___content').text(), 
 				self.translatorCallback, self);
+			$('.translate-page___original-id').attr('id', $(self.$sentence).attr('id'))
+			self.showTranslations($(self.$sentence).attr('id'));
 		});
 	},
 
