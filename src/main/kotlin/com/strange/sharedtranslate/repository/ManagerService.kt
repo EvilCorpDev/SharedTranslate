@@ -9,7 +9,7 @@ import com.strange.sharedtranslate.entities.TextTranslationWrapper
  */
 interface ManagerService {
 
-    fun create(created: TextTranslationWrapper): TextTranslationWrapper
+    fun save(created: TextTranslationWrapper): TextTranslationWrapper
 
     fun delete(id: String): TextTranslationWrapper
 

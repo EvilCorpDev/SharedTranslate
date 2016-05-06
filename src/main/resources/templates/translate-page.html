@@ -17,8 +17,8 @@
         <div class="col-sm-6">
             <article class="translate-page___original">
                 {{#sentences}}
-                    <div class="translate-page___sentence">
-                        <div class="translate-page___content" id="{{id}}">{{original}}</div>
+                    <div class="translate-page___sentence" id="{{id}}">
+                        <div class="translate-page___content">{{original}}</div>
                         <div class="translate-page___actions">
                             <div class="translate-page___action translate-page___manual-translate">Translate</div>
                             <div class="translate-page___action translate-page___yandex-translate">Yandex.Translate</div>
@@ -31,16 +31,14 @@
         </div>
         <div class="col-sm-6">
             <article class="translate-page___translated">
-                {{#translated}}
-                    <div class="translate-page___translation">{{.}}</div>
-                {{/translated}}
+                <div class="translate-page___no-translation">No selected sentence</div>
             </article>
             <article class="contact-form bottom your-translate">
                 <h2>Enter your translation for selection:</h2>
                 <div class="translate-page___selected-sentence"></div>
-                <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                <form id="main-contact-form" name="contact-form" method="post" action="save">
                     <div class="form-group">
-                        <textarea name="message" id="message" required="required" class="form-control translate-page___translate-area" rows="8" placeholder="Your text here"></textarea>
+                        <textarea name="translation" id="message" required="required" class="form-control translate-page___translate-area" rows="8" placeholder="Your text here"></textarea>
                     </div>                        
                     <div class="form-group">
                         <input type="submit" name="submit" class="btn btn-submit" value="Submit">

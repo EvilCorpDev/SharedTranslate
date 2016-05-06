@@ -2790,6 +2790,15 @@ span.stButton_gradient,
   text-align: center;
 }
 
+.translate-page___translated {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.translate-page___no-translation {
+  font-size: 32px;
+}
+
 .upload-page___file-upload-container {
   border: 1px solid #eaeaea;
   border-radius: 3px;

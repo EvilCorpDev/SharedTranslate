@@ -17,9 +17,9 @@ var configurer = {
 		$.ajax({
 			url: matches[1] + '/data' + '?article=' + matches[2].substr(1),
 			success: function(data) {
-				console.log('uspeh');
 				callback(data, templateRaw)
 				self.afterRender();
+				localStorage.setItem('article', JSON.stringify(data.sentences));
 			}
 		});
 	},
@@ -52,6 +52,7 @@ var configurer = {
 		$('.translate-page___manual-translate').on('click', function() {
 			$('.translate-page___selected-sentence').text(self.$sentence.find('.translate-page___content').text());
 			$('.translate-page___translate-area').focus();
+			self.showTranslations($(self.$sentence).attr('id'));
 		});
 		$('.translate-page___yandex-translate').on('click', function() {
 			translator.translate(self.$sentence.find('.translate-page___content').text(), 
@@ -69,5 +70,23 @@ var configurer = {
 		$('.translate-page___selected-sentence').text(self.$sentence.find('.translate-page___content').text());
 		$('.translate-page___translate-area').text(translationData.text[0]);
 		$('.translate-page___translate-area').focus();
+	},
+
+	showTranslations: function(id) {
+		var article = JSON.parse(localStorage.getItem('article'));
+		var translations = article.filter(function(sentence) {
+			return sentence.id == id;
+		})[0].translations;
+
+		if(translations.length == 0) {
+			$('.translate-page___no-translation').text('No translation yet');
+		} else {
+			$('.translate-page___no-translation').hide();
+			translations.forEach(function(item) {
+				console.log(item);
+				$('.translate-page___translated').append('<div class="translate-page___translation">' 
+					+ item.translation + '<div class="author">' + item.author + '</div></div>')
+			});
+		}
 	}
 }

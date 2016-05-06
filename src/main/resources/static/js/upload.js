@@ -15,7 +15,6 @@ var configurer = {
 
 	afterRender: function() {
 		this.appendFileChoserHandler(this);
-		//this.appendActionHandlers(this);
 	},
 
 	appendFileChoserHandler: function(self) {

@@ -25,7 +25,7 @@ class SaveService @Autowired constructor(val mongoManager: MongoManager){
         println(textLines)
         for(line in textLines) {
             println(line)
-            mongoManager.create(TextTranslationWrapper(articleTitle, null, line, emptyList()))
+            mongoManager.save(TextTranslationWrapper(articleTitle, null, line, emptyList()))
         }
     }
 }

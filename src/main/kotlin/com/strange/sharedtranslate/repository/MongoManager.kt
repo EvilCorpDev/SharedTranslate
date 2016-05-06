@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 @Component
 class MongoManager @Autowired constructor(val repository: RepositoryActions): ManagerService {
 
-    override fun create(created: TextTranslationWrapper): TextTranslationWrapper {
+    override fun save(created: TextTranslationWrapper): TextTranslationWrapper {
         return repository.save(created.copy())
     }
 
