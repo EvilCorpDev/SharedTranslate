@@ -1,7 +1,6 @@
 package com.strange.sharedtranslate.controllers
 
 import com.strange.sharedtranslate.entities.Article
-import com.strange.sharedtranslate.entities.TextTranslationWrapper
 import com.strange.sharedtranslate.entities.TranslationWrapper
 import com.strange.sharedtranslate.repository.MongoManager
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
 import java.util.*
-import javax.ws.rs.DefaultValue
 
 /**
  * Created by Zakhar_Kliap on 27-Apr-16.
@@ -23,14 +21,10 @@ import javax.ws.rs.DefaultValue
 class TranslationController @Autowired constructor(val mongoMan: MongoManager) {
 
     @RequestMapping(path = arrayOf("/translate/{article}", "/translate"))
-    fun translate(): String {
-        return "base"
-    }
+    fun translate() = "base"
 
     @RequestMapping("/translate/content")
-    fun translateContent(): String {
-        return "translate-page"
-    }
+    fun translateContent() = "translate-page"
 
     @RequestMapping(path = arrayOf("/translate/data"), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     @ResponseBody
@@ -41,10 +35,9 @@ class TranslationController @Autowired constructor(val mongoMan: MongoManager) {
     @RequestMapping(path = arrayOf("/translate/save"), method = arrayOf(RequestMethod.POST))
     fun saveTranslation(@RequestParam translation: String,
                         @RequestParam("id") originalId: String,
-                        @DefaultValue("Zakhar Kliap") @RequestParam author: String): ResponseEntity<String> {
-        println(translation);
+                        @RequestParam(defaultValue = "Zakhar Kliap") author: String): ResponseEntity<String> {
         val toBeUpdate = mongoMan.findById(originalId)?.update(listOf(TranslationWrapper(translation, author, Date())))
-        if(toBeUpdate != null) {
+        if (toBeUpdate != null) {
             mongoMan.save(toBeUpdate)
             return ResponseEntity(HttpStatus.OK)
         } else {

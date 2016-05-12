@@ -1,7 +1,7 @@
 define(
 	'upload',
 	['jquery'],
-	function($, translator) {
+	function($) {
 		return configurer;
 	}
 );

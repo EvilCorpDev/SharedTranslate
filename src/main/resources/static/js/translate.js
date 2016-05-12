@@ -52,14 +52,12 @@ var configurer = {
 		$('.translate-page___manual-translate').on('click', function() {
 			$('.translate-page___selected-sentence').text(self.$sentence.find('.translate-page___content').text());
 			$('.translate-page___translate-area').focus();
-			$('.translate-page___original-id').attr('id', $(self.$sentence).attr('id'))
-			self.showTranslations($(self.$sentence).attr('id'));
+			$('.translate-page___original-id').val($(self.$sentence).attr('id'));
 		});
 		$('.translate-page___yandex-translate').on('click', function() {
 			translator.translate(self.$sentence.find('.translate-page___content').text(), 
 				self.translatorCallback, self);
-			$('.translate-page___original-id').attr('id', $(self.$sentence).attr('id'))
-			self.showTranslations($(self.$sentence).attr('id'));
+			$('.translate-page___original-id').val($(self.$sentence).attr('id'));
 		});
 	},
 
@@ -67,6 +65,7 @@ var configurer = {
 		this.$sentence = $(element).parent();
 		this.$sentence.find('.translate-page___actions').show(this.speed);
 		$(element).addClass('translate-page___highlighted-text');
+		this.showTranslations($(this.$sentence).attr('id'));
 	},
 
 	translatorCallback: function(translationData, self) {
@@ -76,6 +75,7 @@ var configurer = {
 	},
 
 	showTranslations: function(id) {
+		$('.translate-page___translated').empty();
 		var article = JSON.parse(localStorage.getItem('article'));
 		var translations = article.filter(function(sentence) {
 			return sentence.id == id;
@@ -86,9 +86,8 @@ var configurer = {
 		} else {
 			$('.translate-page___no-translation').hide();
 			translations.forEach(function(item) {
-				console.log(item);
-				$('.translate-page___translated').append('<div class="translate-page___translation">' 
-					+ item.translation + '<div class="author">' + item.author + '</div></div>')
+				$('.translate-page___translated').append('<blockquote class="translate-page___translation">' 
+					+ item.translation + '<cite class="translate-page___author">' + item.author + '</div></div>')
 			});
 		}
 	}
