@@ -1,7 +1,7 @@
 package com.strange.sharedtranslate.services
 
 import com.strange.sharedtranslate.entities.TextTranslationWrapper
-import com.strange.sharedtranslate.repository.MongoManager
+import com.strange.sharedtranslate.repository.TranslationMongoService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.io.File
@@ -12,7 +12,7 @@ import java.io.File
  * Created by Zakhar_Kliap on 04-May-16.
  */
 @Component
-class SaveService @Autowired constructor(val mongoManager: MongoManager){
+class SaveService @Autowired constructor(val translationManager: TranslationMongoService){
 
     fun saveFile(toSave: File, articleTitle: String) {
         when(toSave.extension) {
@@ -25,7 +25,7 @@ class SaveService @Autowired constructor(val mongoManager: MongoManager){
         println(textLines)
         for(line in textLines) {
             println(line)
-            mongoManager.save(TextTranslationWrapper(articleTitle, null, line, emptyList()))
+            translationManager.save(TextTranslationWrapper(articleTitle, null, line, emptyList()))
         }
     }
 }

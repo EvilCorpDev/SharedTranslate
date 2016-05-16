@@ -7,7 +7,7 @@ import com.strange.sharedtranslate.entities.TextTranslationWrapper
  *
  * Created by Notebook on 02.05.2016.
  */
-interface ManagerService {
+interface TranslationService {
 
     fun save(created: TextTranslationWrapper): TextTranslationWrapper
 

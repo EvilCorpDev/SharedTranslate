@@ -2,7 +2,7 @@ package com.strange.sharedtranslate.controllers
 
 import com.strange.sharedtranslate.entities.Article
 import com.strange.sharedtranslate.entities.TranslationWrapper
-import com.strange.sharedtranslate.repository.MongoManager
+import com.strange.sharedtranslate.repository.TranslationMongoService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -18,7 +18,7 @@ import java.util.*
  * Created by Zakhar_Kliap on 27-Apr-16.
  */
 @Controller
-class TranslationController @Autowired constructor(val mongoMan: MongoManager) {
+class TranslationController @Autowired constructor(val translationMan: TranslationMongoService) {
 
     @RequestMapping(path = arrayOf("/translate/{article}", "/translate"))
     fun translate() = "base"
@@ -29,16 +29,16 @@ class TranslationController @Autowired constructor(val mongoMan: MongoManager) {
     @RequestMapping(path = arrayOf("/translate/data"), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     @ResponseBody
     fun translateData(@RequestParam("article") articleTitle: String): Article {
-        return Article(articleTitle.replace('_', ' '), mongoMan.findAllByArticle(articleTitle))
+        return Article(articleTitle.replace('_', ' '), translationMan.findAllByArticle(articleTitle))
     }
 
     @RequestMapping(path = arrayOf("/translate/save"), method = arrayOf(RequestMethod.POST))
     fun saveTranslation(@RequestParam translation: String,
                         @RequestParam("id") originalId: String,
                         @RequestParam(defaultValue = "Zakhar Kliap") author: String): ResponseEntity<String> {
-        val toBeUpdate = mongoMan.findById(originalId)?.update(listOf(TranslationWrapper(translation, author, Date())))
+        val toBeUpdate = translationMan.findById(originalId)?.update(listOf(TranslationWrapper(translation, author, Date())))
         if (toBeUpdate != null) {
-            mongoMan.save(toBeUpdate)
+            translationMan.save(toBeUpdate)
             return ResponseEntity(HttpStatus.OK)
         } else {
             return ResponseEntity(HttpStatus.BAD_REQUEST)

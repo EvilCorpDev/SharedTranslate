@@ -2,7 +2,8 @@ package com.strange.sharedtranslate.repository
 
 import com.strange.sharedtranslate.entities.TextTranslationWrapper
 import com.strange.sharedtranslate.exceptions.EntityNotFoundException
-import com.strange.sharedtranslate.repository.RepositoryActions
+import com.strange.sharedtranslate.repository.TranslationRepositoryActions
+import com.strange.sharedtranslate.repository.TranslationService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component
  * Created by Notebook on 02.05.2016.
  */
 @Component
-class MongoManager @Autowired constructor(val repository: RepositoryActions): ManagerService {
+class TranslationMongoService @Autowired constructor(val repository: TranslationRepositoryActions): TranslationService {
 
     override fun save(created: TextTranslationWrapper): TextTranslationWrapper {
         return repository.save(created.copy())

@@ -9,17 +9,14 @@ import javax.crypto.spec.PBEKeySpec
  */
 object Passwords {
 
-    fun hash(pass: String): String {
-        val spec = PBEKeySpec(pass.toCharArray(), getNextSalt(), 65536, 128)
+    fun hash(pass: String, salt: String?): String {
+        val spec = PBEKeySpec(pass.toCharArray(), salt?.toByteArray(), 65536, 128)
         val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
         val hash = factory.generateSecret(spec).encoded
         return Base64.getEncoder().encodeToString(hash)
     }
 
-    private fun getNextSalt(): ByteArray {
-        val salt = byteArrayOf()
-        val random = Random()
-        random.nextBytes(salt)
-        return salt
+    fun getNextSalt(): String {
+        return UUID.randomUUID().toString().substring(0, 9)
     }
 }
