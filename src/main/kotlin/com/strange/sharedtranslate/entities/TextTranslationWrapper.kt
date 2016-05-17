@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document
  *
  * Created by Notebook on 02.05.2016.
  */
-@Document(collection = "articles")
+@Document(collection = "article-texts")
 data class TextTranslationWrapper(val article: String, val id: String?, val original: String,
                                   val translations: List<TranslationWrapper>) {
 

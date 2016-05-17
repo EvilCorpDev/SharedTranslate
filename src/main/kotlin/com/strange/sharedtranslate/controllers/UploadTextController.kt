@@ -1,5 +1,6 @@
 package com.strange.sharedtranslate.controllers
 
+import com.strange.sharedtranslate.entities.Article
 import com.strange.sharedtranslate.services.SaveService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -18,6 +19,8 @@ import javax.servlet.ServletContext
 @Controller
 class UploadTextController @Autowired constructor(val saveService: SaveService, val servletContext: ServletContext) {
 
+    private val coversPath = "covers/"
+
     @RequestMapping(path = arrayOf("/upload"))
     fun upload() = "base"
 
@@ -25,10 +28,17 @@ class UploadTextController @Autowired constructor(val saveService: SaveService, 
     fun uploadContent() = "upload-page"
 
     @RequestMapping(path = arrayOf("/upload"), method = arrayOf(RequestMethod.POST))
-    fun uploadTxt(@RequestParam(name = "file") uploadedFile: MultipartFile, @RequestParam(name = "article") articleTitle: String): String {
+    fun uploadTxt(@RequestParam(name = "file") uploadedFile: MultipartFile, @RequestParam cover: MultipartFile? = null,
+                  @RequestParam(name = "article") articleTitle: String, @RequestParam description: String = ""): String {
         val toSave = File(servletContext.getRealPath("/") + uploadedFile.originalFilename)
         uploadedFile.transferTo(toSave)
-        saveService.saveFile(toSave, articleTitle.replace(' ', '_'));
+        saveService.saveFile(toSave, articleTitle.replace(' ', '_'))
+        val article = Article(articleTitle, "Zakhar Kliap")
+        saveService.saveArticle(article, cover)
+        if (cover != null) {
+            val coverToSave = File(servletContext.getRealPath("/") + coversPath + cover.originalFilename)
+            cover.transferTo(coverToSave)
+        }
         return "base"
     }
 }

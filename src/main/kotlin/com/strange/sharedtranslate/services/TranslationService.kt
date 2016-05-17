@@ -1,4 +1,4 @@
-package com.strange.sharedtranslate.repository
+package com.strange.sharedtranslate.services
 
 import com.strange.sharedtranslate.entities.TextTranslationWrapper
 
@@ -15,7 +15,7 @@ interface TranslationService {
 
     fun findAllByArticle(article: String): List<TextTranslationWrapper>
 
-    fun findById(id: String): TextTranslationWrapper?
+    fun findOneById(id: String): TextTranslationWrapper?
 
     fun update(updated: TextTranslationWrapper): TextTranslationWrapper
 }

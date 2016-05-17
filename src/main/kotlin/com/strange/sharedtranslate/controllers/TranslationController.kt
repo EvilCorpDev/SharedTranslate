@@ -1,8 +1,8 @@
 package com.strange.sharedtranslate.controllers
 
-import com.strange.sharedtranslate.entities.Article
+import com.strange.sharedtranslate.entities.ArticleText
 import com.strange.sharedtranslate.entities.TranslationWrapper
-import com.strange.sharedtranslate.repository.TranslationMongoService
+import com.strange.sharedtranslate.services.impl.TranslationMongoService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -28,8 +28,8 @@ class TranslationController @Autowired constructor(val translationMan: Translati
 
     @RequestMapping(path = arrayOf("/translate/data"), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     @ResponseBody
-    fun translateData(@RequestParam("article") articleTitle: String): Article {
-        return Article(articleTitle.replace('_', ' '), translationMan.findAllByArticle(articleTitle))
+    fun translateData(@RequestParam("article") articleTitle: String): ArticleText {
+        return ArticleText(articleTitle.replace('_', ' '), translationMan.findAllByArticle(articleTitle))
     }
 
     @RequestMapping(path = arrayOf("/translate/save"), method = arrayOf(RequestMethod.POST))

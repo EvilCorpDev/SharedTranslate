@@ -1,7 +1,7 @@
 package com.strange.sharedtranslate.controllers
 
 import com.strange.sharedtranslate.entities.User
-import com.strange.sharedtranslate.repository.UserMongoService
+import com.strange.sharedtranslate.services.impl.UserMongoService
 import com.strange.sharedtranslate.utils.Passwords
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

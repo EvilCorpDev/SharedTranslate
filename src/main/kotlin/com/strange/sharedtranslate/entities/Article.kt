@@ -1,7 +1,10 @@
 package com.strange.sharedtranslate.entities
 
-/**
- * Created by Zakhar_Kliap on 06-May-16.
- */
+import org.springframework.data.mongodb.core.mapping.Document
 
-data class Article(val article: String, val sentences: List<TextTranslationWrapper>)
+/**
+ * Created by Zakhar_Kliap on 17-May-16.
+ */
+@Document(collection = "articles")
+data class Article(val title: String, val uploader: String, val cover: String = "no-image.png",
+                   val description: String = "", val id: String? = null)

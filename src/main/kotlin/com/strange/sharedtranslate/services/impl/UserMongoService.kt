@@ -1,7 +1,9 @@
-package com.strange.sharedtranslate.repository
+package com.strange.sharedtranslate.services.impl
 
 import com.strange.sharedtranslate.entities.User
 import com.strange.sharedtranslate.exceptions.EntityNotFoundException
+import com.strange.sharedtranslate.repository.UserRepositoryActions
+import com.strange.sharedtranslate.services.UserService
 import com.strange.sharedtranslate.utils.Passwords
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

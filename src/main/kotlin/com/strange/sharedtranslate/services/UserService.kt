@@ -1,4 +1,4 @@
-package com.strange.sharedtranslate.repository
+package com.strange.sharedtranslate.services
 
 import com.strange.sharedtranslate.entities.User
 
