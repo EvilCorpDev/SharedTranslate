@@ -36,7 +36,7 @@ class TranslationController @Autowired constructor(val translationMan: Translati
     fun saveTranslation(@RequestParam translation: String,
                         @RequestParam("id") originalId: String,
                         @RequestParam(defaultValue = "Zakhar Kliap") author: String): ResponseEntity<String> {
-        val toBeUpdate = translationMan.findById(originalId)?.update(listOf(TranslationWrapper(translation, author, Date())))
+        val toBeUpdate = translationMan.findOneById(originalId)?.update(listOf(TranslationWrapper(translation, author, Date())))
         if (toBeUpdate != null) {
             translationMan.save(toBeUpdate)
             return ResponseEntity(HttpStatus.OK)

@@ -31,4 +31,13 @@ class UserMongoService @Autowired constructor(val userActions: UserRepositoryAct
 
     override fun update(updated: User) = save(updated)
 
+    override fun checkUser(login: String, pass: String): User? {
+        val user = userActions.findOneByLogin(login)
+        if(user == null || user.password != Passwords.hash(pass, user.salt)) {
+            return null
+        } else {
+            return user
+        }
+    }
+
 }

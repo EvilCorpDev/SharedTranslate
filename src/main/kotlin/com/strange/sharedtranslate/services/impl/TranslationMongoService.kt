@@ -20,7 +20,7 @@ class TranslationMongoService @Autowired constructor(val repository: Translation
     }
 
     override fun delete(id: String): TextTranslationWrapper {
-        val deleted: TextTranslationWrapper? = findById(id)
+        val deleted: TextTranslationWrapper? = findOneById(id)
         if(deleted != null) {
             return repository.delete(deleted)
         } else {
@@ -32,7 +32,7 @@ class TranslationMongoService @Autowired constructor(val repository: Translation
         return repository.findByArticle(article);
     }
 
-    override fun findById(id: String): TextTranslationWrapper? {
+    override fun findOneById(id: String): TextTranslationWrapper? {
         return repository.findOne(id);
     }
 

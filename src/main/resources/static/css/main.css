@@ -2856,12 +2856,12 @@ span.stButton_gradient,
   font-weight: 300;
 }
 
-.register-page___form-container {
+.register-page___form-container, .auth-page___form-container {
   text-align: center;
   margin-bottom: 150px;
 }
 
-.register-page___form-content {
+.register-page___form-content, .auth-page___form-content {
   display: inline-block;
   float: none;
 }
@@ -2886,6 +2886,12 @@ span.stButton_gradient,
   margin-top: -45px;
   margin-right: 9px;
   background-size: cover;
+}
+
+.auth-page___form-content, .register-page___form-content {
+  background: #e6f5fa;
+  padding: 15px;
+  border-radius: 20px;
 }
 
 ::-webkit-scrollbar {

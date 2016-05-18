@@ -16,4 +16,6 @@ interface UserService {
     fun findOneByEmail(email: String): User?
 
     fun update(updated: User): User
+
+    fun checkUser(login: String, pass: String): User?
 }

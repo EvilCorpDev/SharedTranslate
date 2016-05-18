@@ -12,6 +12,8 @@ interface UserRepositoryActions : Repository<User, String> {
 
     fun findOneByEmail(email: String): User?
 
+    fun findOneByLogin(login: String): User?
+
     fun save(toBeSaved: User): User
 
     fun delete(toBeDelete: User): User
