@@ -1,5 +1,6 @@
 package com.strange.sharedtranslate.services
 
+import com.cloudinary.Cloudinary
 import com.strange.sharedtranslate.entities.Article
 import com.strange.sharedtranslate.entities.TextTranslationWrapper
 import com.strange.sharedtranslate.services.impl.ArticleMongoService
@@ -16,9 +17,8 @@ import java.io.File
  */
 @Component
 class SaveService @Autowired constructor(val translationManager: TranslationMongoService,
-                                         val articleService: ArticleMongoService) {
-
-    private val coversPath = "covers/"
+                                         val articleService: ArticleMongoService,
+                                         val cloudinary: Cloudinary) {
 
     fun saveFile(toSave: File, articleTitle: String = "") {
         when (toSave.extension) {
@@ -26,9 +26,13 @@ class SaveService @Autowired constructor(val translationManager: TranslationMong
         }
     }
 
-    fun saveArticle(article: Article, cover: MultipartFile?) {
-        if (cover != null) {
-            articleService.save(article.copy(cover = coversPath + cover.originalFilename))
+    fun saveArticle(articleTitle: String, description: String, cover: MultipartFile, realPath: String) {
+        val article = Article(articleTitle, "Zakhar Kliap", description = description)
+        if (!cover.isEmpty) {
+            val coverToSave = File(realPath + cover.originalFilename)
+            cover.transferTo(coverToSave)
+            val uploadResult = cloudinary.uploader().upload(coverToSave, emptyMap<String, Any>())
+            articleService.save(article.copy(cover = uploadResult["secure_url"].toString()))
         } else {
             articleService.save(article.copy())
         }
@@ -37,9 +41,9 @@ class SaveService @Autowired constructor(val translationManager: TranslationMong
     private fun saveTxt(txtFile: File, articleTitle: String) {
         val textLines = txtFile.readLines().flatMap { it.split('.') }.map { it + "." }
         println(textLines)
-        for (line in textLines) {
+        for ((index, line) in textLines.withIndex()) {
             println(line)
-            translationManager.save(TextTranslationWrapper(articleTitle, null, line, emptyList()))
+            translationManager.save(TextTranslationWrapper(articleTitle, line, index))
         }
     }
 }

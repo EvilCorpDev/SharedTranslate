@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document
  * Created by Notebook on 02.05.2016.
  */
 @Document(collection = "article-texts")
-data class TextTranslationWrapper(val article: String, val id: String?, val original: String,
-                                  val translations: List<TranslationWrapper>) {
+data class TextTranslationWrapper(val article: String = "", val original: String = "", val number: Int = 0,
+                                  val translations: List<TranslationWrapper> = emptyList(), val id: String? = null) {
 
     fun update(newTranslations: List<TranslationWrapper>): TextTranslationWrapper {
         val notUpdated = translations.filter { !newTranslations.map { it.author }.toList().contains(it.author) }

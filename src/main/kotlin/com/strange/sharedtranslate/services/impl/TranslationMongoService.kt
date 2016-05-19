@@ -5,6 +5,7 @@ import com.strange.sharedtranslate.exceptions.EntityNotFoundException
 import com.strange.sharedtranslate.repository.TranslationRepositoryActions
 import com.strange.sharedtranslate.services.TranslationService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Component
 
 /**
@@ -19,17 +20,17 @@ class TranslationMongoService @Autowired constructor(val repository: Translation
         return repository.save(created.copy())
     }
 
-    override fun delete(id: String): TextTranslationWrapper {
+    override fun delete(id: String) {
         val deleted: TextTranslationWrapper? = findOneById(id)
         if(deleted != null) {
-            return repository.delete(deleted)
+            repository.delete(deleted)
         } else {
             throw EntityNotFoundException("Sorry we can't found entity with id $id")
         }
     }
 
     override fun findAllByArticle(article: String): List<TextTranslationWrapper> {
-        return repository.findByArticle(article);
+        return repository.findByArticle(article, Sort("number"));
     }
 
     override fun findOneById(id: String): TextTranslationWrapper? {

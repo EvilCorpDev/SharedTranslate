@@ -11,7 +11,7 @@ interface TranslationService {
 
     fun save(created: TextTranslationWrapper): TextTranslationWrapper
 
-    fun delete(id: String): TextTranslationWrapper
+    fun delete(id: String)
 
     fun findAllByArticle(article: String): List<TextTranslationWrapper>
 

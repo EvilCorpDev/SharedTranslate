@@ -1,20 +1,23 @@
 package com.strange.sharedtranslate.repository
 
 import com.strange.sharedtranslate.entities.TextTranslationWrapper
-import org.springframework.data.repository.Repository
+import org.springframework.data.domain.Sort
+import org.springframework.data.repository.PagingAndSortingRepository
 
 /**
  * Supported actions for working with repository
  *
  * Created by Notebook on 02.05.2016.
  */
-interface TranslationRepositoryActions : Repository<TextTranslationWrapper, String> {
+interface TranslationRepositoryActions : PagingAndSortingRepository<TextTranslationWrapper, String> {
 
-    fun delete(deleted: TextTranslationWrapper): TextTranslationWrapper
+    override fun delete(deleted: TextTranslationWrapper)
 
     fun findByArticle(article: String): List<TextTranslationWrapper>
 
-    fun findOne(id: String): TextTranslationWrapper?
+    fun findByArticle(article: String, sorter: Sort): List<TextTranslationWrapper>
+
+    override fun findOne(id: String): TextTranslationWrapper?
 
     fun save (saved: TextTranslationWrapper): TextTranslationWrapper
 }

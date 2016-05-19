@@ -17,9 +17,7 @@ import javax.servlet.ServletContext
  * Created by Zakhar_Kliap on 04-May-16.
  */
 @Controller
-class UploadTextController @Autowired constructor(val saveService: SaveService, val servletContext: ServletContext) {
-
-    private val coversPath = "covers/"
+class UploadController @Autowired constructor(val saveService: SaveService, val servletContext: ServletContext) {
 
     @RequestMapping(path = arrayOf("/upload"))
     fun upload() = "base"
@@ -28,17 +26,12 @@ class UploadTextController @Autowired constructor(val saveService: SaveService, 
     fun uploadContent() = "upload-page"
 
     @RequestMapping(path = arrayOf("/upload"), method = arrayOf(RequestMethod.POST))
-    fun uploadTxt(@RequestParam(name = "file") uploadedFile: MultipartFile, @RequestParam cover: MultipartFile? = null,
+    fun uploadTxt(@RequestParam(name = "file") uploadedFile: MultipartFile, @RequestParam cover: MultipartFile,
                   @RequestParam(name = "article") articleTitle: String, @RequestParam description: String = ""): String {
         val toSave = File(servletContext.getRealPath("/") + uploadedFile.originalFilename)
         uploadedFile.transferTo(toSave)
+        saveService.saveArticle(articleTitle, description, cover, servletContext.getRealPath("/"))
         saveService.saveFile(toSave, articleTitle.replace(' ', '_'))
-        val article = Article(articleTitle, "Zakhar Kliap")
-        saveService.saveArticle(article, cover)
-        if (cover != null) {
-            val coverToSave = File(servletContext.getRealPath("/") + coversPath + cover.originalFilename)
-            cover.transferTo(coverToSave)
-        }
         return "base"
     }
 }
