@@ -17,9 +17,13 @@ var configurer = {
 		$('.auth-page___auth-form').submit(function(event) {
 			event.preventDefault();
 			var formData = $('.auth-page___form-content').find('#main-contact-form').serializeArray();
-			console.log(formData);
 			$.post('auth', formData, function(data) {
 				console.log(data);
+				if(data.granted) {
+					location.href = '/user'
+				} else {
+					$('.auth-page___error').css('display', 'flex')
+				}
 			});
 		});
 	}

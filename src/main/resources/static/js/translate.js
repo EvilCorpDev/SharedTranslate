@@ -1,7 +1,9 @@
 define(
 	'translate',
-	['jquery', 'yandex.translate'],
-	function($, translator) {
+	['jquery', 'yandex.translate', 'alertify'],
+	function($, translator, alertify) {
+		configurer.alertify = alertify;
+		console.log(configurer.alertify);
 		return configurer;
 	}
 );
@@ -46,6 +48,20 @@ var configurer = {
 				self.showElement(this);
 			}
 		});
+
+		$('.translate-page___translate-form').submit(function(event) {
+			event.preventDefault();
+			var data = $(this).serializeArray();
+			$.post('/translate/save', data, function(result) {
+			}).done(function() {
+				var item = {translation: $('.translate-page___translate-area').text(),
+							author: $('.base-html___login').text()};
+				self.appendTranslationItem(item);
+				self.alertify.success('Translation was successfuly added')
+			}).fail(function() {
+				self.alertify.error('Sorry, something was wrong try latter')
+			});
+		});
 	},
 
 	appendActionHandlers: function(self) {
@@ -76,6 +92,7 @@ var configurer = {
 
 	showTranslations: function(id) {
 		$('.translate-page___translated').empty();
+		var self = this;
 		var article = JSON.parse(localStorage.getItem('article'));
 		var translations = article.filter(function(sentence) {
 			return sentence.id == id;
@@ -86,9 +103,14 @@ var configurer = {
 		} else {
 			$('.translate-page___no-translation').hide();
 			translations.forEach(function(item) {
-				$('.translate-page___translated').append('<blockquote class="translate-page___translation">' 
-					+ item.translation + '<cite class="translate-page___author">' + item.author + '</div></div>')
+				self.appendTranslationItem(item);
 			});
 		}
+	},
+
+	appendTranslationItem: function(item) {
+		$('.translate-page___translated').append('<blockquote class="translate-page___translation">' 
+					+ item.translation + '<cite class="translate-page___author"><a href="/user/' + item.author +'">' 
+					+ item.author + '</a></cite></blockquote>');
 	}
 }

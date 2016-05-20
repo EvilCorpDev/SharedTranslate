@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component
 @Component
 class UserMongoService @Autowired constructor(val userActions: UserRepositoryActions) : UserService {
 
+    override fun findOneByLogin(login: String) = userActions.findOneByLogin(login)
+
     override fun save(created: User) = userActions.save(created.copy(password = Passwords.hash(created.password, created.salt)))
 
     override fun delete(id: String): User {

@@ -2894,6 +2894,16 @@ span.stButton_gradient,
   border-radius: 20px;
 }
 
+.auth-page___error {
+  background: #f2c4cf;
+  margin-top: 31px;
+  height: 30px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

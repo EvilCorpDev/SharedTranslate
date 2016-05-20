@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody
 class ArticlesController @Autowired constructor(val articleService: ArticleMongoService) {
 
     @RequestMapping(path = arrayOf("/articles/{page}/{size}", "/articles"))
-    fun allTexts() = "base"
+    fun articles() = "base"
 
     @RequestMapping("/articles/content")
-    fun allTextsContent() = "articles-page"
+    fun articlesContent() = "articles-page"
 
     @RequestMapping("/articles/data/{page}/{size}")
     @ResponseBody
-    fun allTextsData(@PathVariable page: Int, @PathVariable size: Int) = articleService.findAll(PageRequest(page, size)).toList()
+    fun articlesData(@PathVariable page: Int, @PathVariable size: Int) = articleService.findAll(PageRequest(page, size)).toList()
 
 }
