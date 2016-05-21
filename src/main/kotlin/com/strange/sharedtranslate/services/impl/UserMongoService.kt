@@ -7,11 +7,12 @@ import com.strange.sharedtranslate.services.UserService
 import com.strange.sharedtranslate.utils.Passwords
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
 /**
  * Created by Zakhar_Kliap on 16-May-16.
  */
-@Component
+@Service
 class UserMongoService @Autowired constructor(val userActions: UserRepositoryActions) : UserService {
 
     override fun findOneByLogin(login: String) = userActions.findOneByLogin(login)

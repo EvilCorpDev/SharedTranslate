@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
 import javax.servlet.http.HttpSession
 
@@ -27,8 +28,8 @@ class UserController @Autowired constructor(val userService: UserMongoService) {
 
     @RequestMapping("/user/data")
     @ResponseBody
-    fun currentUserData(session: HttpSession): User {
-        val user = session.getAttribute("user")
-        return user as User
+    fun currentUserData(session: HttpSession): User? {
+        val user = session.getAttribute("user") ?: return null
+        return (user as User).copy(password = "")
     }
 }

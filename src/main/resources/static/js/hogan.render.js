@@ -21,5 +21,12 @@ var hoganRenderer = {
 		console.log(data);
 		var template = Hogan.compile(templateRaw);
 		$('.main-content').append(template.render(data));
+		$.get('/user/data', function(data) {
+			console.log(data)
+			if(data) {
+				$('.base-html___login').text(data.login);
+				$('.base-html___user-panel').show();
+			}
+		});
 	}
 }

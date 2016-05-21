@@ -7,11 +7,12 @@ import com.strange.sharedtranslate.services.ArticleService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
 /**
  * Created by Zakhar_Kliap on 17-May-16.
  */
-@Component
+@Service
 class ArticleMongoService @Autowired constructor(val repo: ArticleRepositoryActions) : ArticleService {
 
     override fun save(created: Article) = repo.save(created.copy())

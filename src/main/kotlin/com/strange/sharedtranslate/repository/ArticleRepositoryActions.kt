@@ -19,6 +19,4 @@ interface ArticleRepositoryActions : PagingAndSortingRepository<Article, String>
     override fun findAll(): List<Article>
 
     override fun findAll(pageable: Pageable): Page<Article>
-
-    fun save (saved: Article): Article
 }

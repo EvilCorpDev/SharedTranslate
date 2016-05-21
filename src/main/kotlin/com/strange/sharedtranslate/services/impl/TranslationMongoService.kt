@@ -7,13 +7,14 @@ import com.strange.sharedtranslate.services.TranslationService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
 /**
  * Manager Service implementation
  *
  * Created by Notebook on 02.05.2016.
  */
-@Component
+@Service
 class TranslationMongoService @Autowired constructor(val repository: TranslationRepositoryActions): TranslationService {
 
     override fun save(created: TextTranslationWrapper): TextTranslationWrapper {

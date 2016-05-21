@@ -18,6 +18,4 @@ interface TranslationRepositoryActions : PagingAndSortingRepository<TextTranslat
     fun findByArticle(article: String, sorter: Sort): List<TextTranslationWrapper>
 
     override fun findOne(id: String): TextTranslationWrapper?
-
-    fun save (saved: TextTranslationWrapper): TextTranslationWrapper
 }

@@ -2791,6 +2791,7 @@ span.stButton_gradient,
 }
 
 .translate-page___translated {
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2800,7 +2801,34 @@ span.stButton_gradient,
 }
 
 .translate-page___author {
-  display: block;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.translate-page___up-arrow {
+  margin-right: 5px;
+  display: inline-block;
+  background-image: url(../images/up-arrow.ico);
+  height: 20px;
+  width: 20px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.translate-page___down-arrow {
+  display: inline-block;
+  background-image: url(../images/down-arrow.png);
+  height: 20px;
+  width: 20px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.translate-page___rate {
+  background-image: url(../images/red-circle.png);
+  height: 35px;
+  width: 35px;
+  background-size: cover;
 }
 
 .invisible {
@@ -2902,6 +2930,18 @@ span.stButton_gradient,
   align-items: center;
   justify-content: center;
   border-radius: 20px;
+}
+
+.base-html___user-panel {
+  display: none;
+}
+
+.base-html___login {
+  display: inline-block;
+}
+
+.base-html___logout-btn {
+  display: inline-block;
 }
 
 ::-webkit-scrollbar {

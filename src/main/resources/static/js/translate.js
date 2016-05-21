@@ -99,6 +99,7 @@ var configurer = {
 		})[0].translations;
 
 		if(translations.length == 0) {
+			$('.translate-page___no-translation').show();
 			$('.translate-page___no-translation').text('No translation yet');
 		} else {
 			$('.translate-page___no-translation').hide();
@@ -110,7 +111,9 @@ var configurer = {
 
 	appendTranslationItem: function(item) {
 		$('.translate-page___translated').append('<blockquote class="translate-page___translation">' 
-					+ item.translation + '<cite class="translate-page___author"><a href="/user/' + item.author +'">' 
-					+ item.author + '</a></cite></blockquote>');
+			+ '<figure class="translate-page___rate">10</figure>'
+			+ item.translation + '<cite class="translate-page___author"><a href="/user/' + item.author +'">' 
+			+ item.author + '</a></cite><div class="translate-page___up-arrow"></div>'
+			+ '<div class="translate-page___down-arrow"></div></blockquote>');
 	}
 }

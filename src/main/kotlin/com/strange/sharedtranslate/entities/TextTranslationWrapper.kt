@@ -12,7 +12,7 @@ data class TextTranslationWrapper(val article: String = "", val original: String
                                   val translations: List<TranslationWrapper> = emptyList(), val id: String? = null) {
 
     fun update(newTranslations: List<TranslationWrapper>): TextTranslationWrapper {
-        val notUpdated = translations.filter { !newTranslations.map { it.author }.toList().contains(it.author) }
+        val notUpdated = translations.filter { !newTranslations.map { it.author }.contains(it.author) }
         val updatedTranslations = notUpdated.plus(newTranslations).sortedBy { it.translationDate }.toList()
         return this.copy(translations = updatedTranslations)
     }

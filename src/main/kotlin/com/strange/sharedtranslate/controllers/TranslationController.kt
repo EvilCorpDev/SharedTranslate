@@ -3,6 +3,7 @@ package com.strange.sharedtranslate.controllers
 import com.strange.sharedtranslate.entities.ArticleText
 import com.strange.sharedtranslate.entities.TranslationWrapper
 import com.strange.sharedtranslate.entities.User
+import com.strange.sharedtranslate.exceptions.EntityNotFoundException
 import com.strange.sharedtranslate.services.impl.TranslationMongoService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -47,5 +48,11 @@ class TranslationController @Autowired constructor(val translationMan: Translati
         } else {
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
+    }
+
+
+    @RequestMapping("/translation/rate")
+    fun increaseRate(@RequestParam login: String, @RequestParam originalId: String, session: HttpSession) {
+
     }
 }
