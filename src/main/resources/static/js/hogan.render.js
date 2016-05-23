@@ -1,7 +1,6 @@
 $(function() {
 	var path = /(\/\w+)(\/\w+)?/g;
 	var matches = path.exec(window.location.pathname);
-	console.log(matches[1].substr(1));
 	require([matches[1].substr(1), 'jquery'], function(configurer, $) {
 		hoganRenderer.renderTemplate(configurer, matches);
 	});
@@ -17,12 +16,9 @@ var hoganRenderer = {
 	},
 
 	appendContent: function(data, templateRaw) {
-		console.log('-----------trace---------------')
-		console.log(data);
 		var template = Hogan.compile(templateRaw);
 		$('.main-content').append(template.render(data));
 		$.get('/user/data', function(data) {
-			console.log(data)
 			if(data) {
 				$('.base-html___login').text(data.login);
 				$('.base-html___user-panel').show();

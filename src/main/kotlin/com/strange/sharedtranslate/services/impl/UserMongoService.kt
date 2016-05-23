@@ -36,7 +36,7 @@ class UserMongoService @Autowired constructor(val userActions: UserRepositoryAct
 
     override fun checkUser(login: String, pass: String): User? {
         val user = userActions.findOneByLogin(login)
-        if(user == null || user.password != Passwords.hash(pass, user.salt)) {
+        if(user == null || !Passwords.checkPass(user.salt, pass, user.password)) {
             return null
         } else {
             return user

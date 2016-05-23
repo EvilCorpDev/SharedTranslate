@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 
 /**
+ * All articles page
+ *
  * Created by Zakhar_Kliap on 17-May-16.
  */
 @Controller

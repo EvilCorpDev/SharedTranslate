@@ -1,8 +1,7 @@
 package com.strange.sharedtranslate.utils
 
-import java.util.*
-import javax.crypto.SecretKeyFactory
-import javax.crypto.spec.PBEKeySpec
+import org.springframework.security.crypto.keygen.KeyGenerators
+import org.springframework.security.crypto.password.StandardPasswordEncoder
 
 /**
  * Created by Zakhar_Kliap on 12-May-16.
@@ -10,13 +9,14 @@ import javax.crypto.spec.PBEKeySpec
 object Passwords {
 
     fun hash(pass: String, salt: String?): String {
-        val spec = PBEKeySpec(pass.toCharArray(), salt?.toByteArray(), 65536, 128)
-        val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
-        val hash = factory.generateSecret(spec).encoded
-        return Base64.getEncoder().encodeToString(hash)
+        return StandardPasswordEncoder(salt).encode(pass)
     }
 
     fun getNextSalt(): String {
-        return UUID.randomUUID().toString().substring(0, 9)
+        return KeyGenerators.string().generateKey()
+    }
+
+    fun checkPass(salt: String, pass: String, encryptedPass: String): Boolean {
+        return StandardPasswordEncoder(salt).matches(pass, encryptedPass)
     }
 }

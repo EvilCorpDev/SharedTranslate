@@ -1,7 +1,7 @@
 package com.strange.sharedtranslate.services.impl
 
 import com.strange.sharedtranslate.exceptions.EntityNotFoundException
-import com.strange.sharedtranslate.exceptions.PersmissionDeniedException
+import com.strange.sharedtranslate.exceptions.PermissionDeniedException
 import com.strange.sharedtranslate.services.RatingServiceActions
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -26,7 +26,7 @@ class RatingService @Autowired constructor(val translationService: TranslationMo
         val authorTranslation = translationItem.translations.find { it.author == authorLogin }
         if (authorTranslation != null) {
             if (authorTranslation.commentedBy.contains(commentedBy)) {
-                throw PersmissionDeniedException("User $commentedBy has already commented this translation")
+                throw PermissionDeniedException("User $commentedBy has already commented this translation")
             }
             changeUserRate(authorLogin, increase)
             val rate = if(increase) 1 else -1;
@@ -35,6 +35,8 @@ class RatingService @Autowired constructor(val translationService: TranslationMo
     }
 
     private fun changeUserRate(userLogin: String, increase: Boolean) {
+        println(increase)
+        println(rateIncrease.toInt())
         if(increase) {
             val finded = userService.findOneByLogin(userLogin) ?:
                     throw EntityNotFoundException("User with login $userLogin was not found")

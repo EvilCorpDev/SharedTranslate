@@ -12,6 +12,6 @@ import org.springframework.web.servlet.ModelAndView
 @Controller
 class Home {
 
-    @RequestMapping("/")
+    @RequestMapping(path = arrayOf("/", "index"))
     fun index() = "index"
 }

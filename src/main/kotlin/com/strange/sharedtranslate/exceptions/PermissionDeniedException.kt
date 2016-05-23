@@ -5,4 +5,4 @@ package com.strange.sharedtranslate.exceptions
  *
  * Created by Notebook on 21.05.2016.
  */
-class PersmissionDeniedException(val msg: String) : Throwable(msg)
+class PermissionDeniedException(val msg: String) : Throwable(msg)

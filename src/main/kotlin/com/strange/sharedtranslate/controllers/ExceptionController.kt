@@ -16,13 +16,13 @@ class ExceptionController {
 
     @ExceptionHandler(value = EntityNotFoundException::class)
     fun handleEntityNotFound(exc: EntityNotFoundException): ModelAndView {
-        val result = ModelAndView("404")
+        val result = ModelAndView("error")
         result.addObject("errorStack", exc.msg)
         return result
     }
 
     @ExceptionHandler(value = Throwable::class)
     fun handleOtherExc(exc: Throwable): String {
-        return "404"
+        return "error"
     }
 }

@@ -3,7 +3,6 @@ define(
 	['jquery', 'yandex.translate', 'alertify'],
 	function($, translator, alertify) {
 		configurer.alertify = alertify;
-		console.log(configurer.alertify);
 		return configurer;
 	}
 );
@@ -29,6 +28,7 @@ var configurer = {
 	afterRender: function() {
 		this.appendHandlers(this);
 		this.appendActionHandlers(this);
+		this.appendRatingButtons(this);
 	},
 
 	appendHandlers: function(self) {
@@ -64,16 +64,24 @@ var configurer = {
 		});
 	},
 
+	appendRatingButtons: function(self) {
+		$('.translate-page___translated').on('click', '.translate-page___up-arrow', function(event) {
+			self.changeRating(this, true);
+		});
+
+		$('.translate-page___translated').on('click', '.translate-page___down-arrow', function(event) {
+			self.changeRating(this, false);
+		});
+	},
+
 	appendActionHandlers: function(self) {
 		$('.translate-page___manual-translate').on('click', function() {
 			$('.translate-page___selected-sentence').text(self.$sentence.find('.translate-page___content').text());
 			$('.translate-page___translate-area').focus();
-			$('.translate-page___original-id').val($(self.$sentence).attr('id'));
 		});
 		$('.translate-page___yandex-translate').on('click', function() {
 			translator.translate(self.$sentence.find('.translate-page___content').text(), 
 				self.translatorCallback, self);
-			$('.translate-page___original-id').val($(self.$sentence).attr('id'));
 		});
 	},
 
@@ -92,6 +100,7 @@ var configurer = {
 
 	showTranslations: function(id) {
 		$('.translate-page___translated').empty();
+		$('.translate-page___original-id').val($(this.$sentence).attr('id'));
 		var self = this;
 		var article = JSON.parse(localStorage.getItem('article'));
 		var translations = article.filter(function(sentence) {
@@ -110,10 +119,18 @@ var configurer = {
 	},
 
 	appendTranslationItem: function(item) {
-		$('.translate-page___translated').append('<blockquote class="translate-page___translation">' 
-			+ '<figure class="translate-page___rate">10</figure>'
-			+ item.translation + '<cite class="translate-page___author"><a href="/user/' + item.author +'">' 
-			+ item.author + '</a></cite><div class="translate-page___up-arrow"></div>'
-			+ '<div class="translate-page___down-arrow"></div></blockquote>');
+		$.get('/translate/translation-template', function(templateRaw) {
+			var template = Hogan.compile(templateRaw);
+			$('.translate-page___translated').append(template.render(item));
+		});
+	},
+
+	changeRating: function(element, increase) {
+		var  data = {login: $(element).siblings('.translate-page___author').text().trimLeft(),
+					 originalId: $('.translate-page___original-id').val(),
+					 increase: increase};
+		$.post('/translation/rate', data, function(result) {
+			console.log(result)
+		});
 	}
 }
