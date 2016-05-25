@@ -1,0 +1,45 @@
+<div id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title">{{article}}</h1>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="article-translation">
+    <div class="row">
+        <div class="col-sm-6">
+            <article class="read-page___left-page">
+                {{#leftPage}}
+                    <div class="read-page___sentence" id="{{id}}">
+                        <div class="read-page___content">{{translations.0.translation}}</div>
+                        <div class="read-page___actions">
+                            <div class="read-page___action read-page___translations">Other Translations</div>
+                            <div class="read-page___action read-page___original">Original</div>
+                        </div>
+                    </div>
+                {{/leftPage}}
+            </article>
+        </div>
+         <div class="col-sm-6">
+            <article class="read-page___right-page">
+                {{#rightPage}}
+                    <div class="read-page___sentence" id="{{id}}">
+                        <div class="read-page___content">{{translations.0.translation}}</div>
+                        <div class="read-page___actions">
+                            <div class="read-page___action read-page___translations">Other Translations</div>
+                            <div class="read-page___action read-page___original">Original</div>
+                        </div>
+                    </div>
+                {{/rightPage}}
+            </article>
+        </div>
+       
+    </div>
+</div>

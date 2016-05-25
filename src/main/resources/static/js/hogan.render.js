@@ -1,6 +1,7 @@
 $(function() {
 	var path = /(\/\w+)(\/\w+)?/g;
 	var matches = path.exec(window.location.pathname);
+	console.log(matches[1].substr(1));
 	require([matches[1].substr(1), 'jquery'], function(configurer, $) {
 		hoganRenderer.renderTemplate(configurer, matches);
 	});

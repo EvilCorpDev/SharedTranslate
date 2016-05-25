@@ -5,6 +5,7 @@ import com.strange.sharedtranslate.exceptions.EntityNotFoundException
 import com.strange.sharedtranslate.repository.TranslationRepositoryActions
 import com.strange.sharedtranslate.services.TranslationService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
@@ -32,6 +33,10 @@ class TranslationMongoService @Autowired constructor(val repository: Translation
 
     override fun findAllByArticle(article: String): List<TextTranslationWrapper> {
         return repository.findByArticle(article, Sort("number"));
+    }
+
+    override fun findByArticleWithPage(article: String, pageNumber: Int, pageSize: Int): List<TextTranslationWrapper> {
+        return repository.findByArticle(article, PageRequest(pageNumber, pageSize, Sort.Direction.DESC, "number"))
     }
 
     override fun findOneById(id: String): TextTranslationWrapper? {

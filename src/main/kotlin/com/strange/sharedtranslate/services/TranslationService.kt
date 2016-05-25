@@ -15,6 +15,8 @@ interface TranslationService {
 
     fun findAllByArticle(article: String): List<TextTranslationWrapper>
 
+    fun findByArticleWithPage(article: String, pageNumber: Int, pageSize: Int): List<TextTranslationWrapper>
+
     fun findOneById(id: String): TextTranslationWrapper?
 
     fun update(updated: TextTranslationWrapper): TextTranslationWrapper
