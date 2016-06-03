@@ -9,8 +9,14 @@ define(
 var configurer = {
 
 	getData: function(matches, callback, templateRaw) {
-		callback({}, templateRaw);
-		this.afterRender();
+		var self = this;
+		$.ajax({
+			url: matches[0] + '/data',
+			success: function(data) {
+				callback(data, templateRaw)
+				self.afterRender();
+			}
+		});
 	},
 
 	afterRender: function() {

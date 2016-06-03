@@ -28,6 +28,8 @@ class ReadingController @Autowired constructor(val readingService: ReadingServic
         println("Some text")
         val leftPage = readingService.buildArticleTranslateWithPage(articleTitle, 0)
         val rightPage = readingService.buildArticleTranslateWithPage(articleTitle, leftPage.last().number)
+        println(leftPage)
+        println(rightPage)
         return ReadingPages(leftPage, rightPage)
     }
 }
