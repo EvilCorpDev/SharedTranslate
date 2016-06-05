@@ -20,7 +20,7 @@ class ReadingController @Autowired constructor(val readingService: ReadingServic
     fun read() = "base"
 
     @RequestMapping("/read/content")
-    fun readContent() = "read-page"
+    fun readContent() = "reading-page-mockup"
 
     @RequestMapping("/read/{articleTitle}/data")
     @ResponseBody

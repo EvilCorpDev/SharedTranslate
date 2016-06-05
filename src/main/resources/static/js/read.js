@@ -20,6 +20,10 @@ var configurer = {
 	},
 
 	afterRender: function() {
-		
+		$('.reading-page___sentence').click(function() {
+			var marginShift = ($(this).height() + $(this).find('.reading-page___original').height() + 10) * -1;
+			$(this).find('.reading-page___original').css('margin-top', marginShift);
+			$(this).find('.reading-page___original').toggle();
+		});
 	}
 }
