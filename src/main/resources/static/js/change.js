@@ -1,5 +1,5 @@
 define(
-	'user',
+	'change',
 	['jquery'],
 	function($) {
 		return configurer;

@@ -36,7 +36,7 @@ class TranslationMongoService @Autowired constructor(val repository: Translation
     }
 
     override fun findByArticleWithPage(article: String, pageNumber: Int, pageSize: Int): List<TextTranslationWrapper> {
-        return repository.findByArticle(article, PageRequest(pageNumber, pageSize, Sort.Direction.DESC, "number"))
+        return repository.findByArticle(article, PageRequest(pageNumber - 1, pageSize, Sort.Direction.DESC, "number"))
     }
 
     override fun findOneById(id: String): TextTranslationWrapper? {

@@ -19,5 +19,7 @@ interface ArticleService {
 
     fun findAll(pageable: Pageable): Page<Article>
 
+    fun findAll(): List<Article>
+
     fun update(updated: Article): Article
 }

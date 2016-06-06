@@ -5,6 +5,7 @@ import com.strange.sharedtranslate.exceptions.EntityNotFoundException
 import com.strange.sharedtranslate.repository.ArticleRepositoryActions
 import com.strange.sharedtranslate.services.ArticleService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
@@ -31,6 +32,8 @@ class ArticleMongoService @Autowired constructor(val repo: ArticleRepositoryActi
     override fun findById(id: String) = repo.findOneById(id)
 
     override fun findAll(pageable: Pageable) = repo.findAll(pageable)
+
+    override fun findAll() = repo.findAll()
 
     override fun update(updated: Article) = save(updated)
 

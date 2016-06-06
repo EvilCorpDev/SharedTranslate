@@ -1,5 +1,6 @@
 package com.strange.sharedtranslate.controllers
 
+import com.strange.sharedtranslate.entities.Article
 import com.strange.sharedtranslate.services.impl.ArticleMongoService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
-
 /**
  * All articles page
  *
@@ -24,6 +24,9 @@ class ArticlesController @Autowired constructor(val articleService: ArticleMongo
 
     @RequestMapping("/articles/data/{page}/{size}")
     @ResponseBody
-    fun articlesData(@PathVariable page: Int, @PathVariable size: Int) = articleService.findAll(PageRequest(page, size)).toList()
+    fun articlesData(@PathVariable page: Int, @PathVariable size: Int): List<Article> {
+        return articleService.findAll(PageRequest(page - 1, size)).toList()
+    }
 
 }
+

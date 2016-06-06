@@ -27,8 +27,8 @@ class RegistrationController @Autowired constructor(val userService: UserMongoSe
     fun saveUser(@RequestParam name: String,
                  @RequestParam login: String,
                  @RequestParam email: String,
-                 @RequestParam pass: String): ResponseEntity<String> {
+                 @RequestParam pass: String): String {
         userService.save(User(null, name, login, email, pass, salt = Passwords.getNextSalt()))
-        return ResponseEntity(HttpStatus.OK)
+        return "redirect:/auth"
     }
 }
