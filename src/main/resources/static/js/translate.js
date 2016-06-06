@@ -112,9 +112,13 @@ var configurer = {
 			$('.translate-page___no-translation').text('No translation yet');
 		} else {
 			$('.translate-page___no-translation').hide();
-			translations.forEach(function(item) {
-				self.appendTranslationItem(item);
+			translations.sort(function(first, next) {
+				return first.rating > next.rating ? 0 : 1;
 			});
+			console.log(translations);
+			for(i = 0; i < translations.length; i++) {
+				self.appendTranslationItem(translations[i]);
+			}
 		}
 	},
 
